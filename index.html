@@ -2,55 +2,29 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bike's Home</title>
-    <link rel="stylesheet" href="resources/css/styles.css">
-    <script defer src="search.js"></script>
+    <meta charset="UTF-8" />
+    <title>Bike Catalog</title>
+    <style>
+      body {
+            margin: 0;
+            text-align: center;
+            padding: 3em;
+            font-family: Arial, sans-serif;
+            font-size: 16px;
+            line-height: 1.4;
+            color: #333;
+            background-color: #f2f2f2;
+        }
+    </style>
+    <script type="module" src="./search-box.js"></script>
+    <script type="module" src="./bike-card.js"></script>
+    <script type="module" src="./bike-catalog.js"></script>
+    <script type="module" src="./script.js"></script>
 </head>
 
 <body>
-    <header>
-        <h1>Bike's Home</h1>
-        <nav>
-            <ul>
-                <li><a href="index">Home</a></li>
-                <li><a href="dispo.html">Bike</a></li>
-            </ul>
-        </nav>
-    </header>
-    <main>
-        <section id="hero">
-            <h2>Welcome to Bike's Home</h2>
-            <p>We sell the best bikes in town!</p>
-        </section>
-        <form class="search-form" action="dispo.html" method="get">
-            <input type="text" name="bike" placeholder="Bike name">
-            <input type="text" name="type" placeholder="Bike type">
-            <input type="text" name="manufacturer" placeholder="Bike manufacturer">
-            <button type="submit">Search</button>
-        </form>
-        <section id="featured">
-            <div class="product">
-                <img src="resources/img/bike.jpg" alt="Product 1">
-                <h3>Search For a Bike</h3>
-                <p>Use our search tool to search for the bike of your dreams</p>
-            </div>
-            <div class="product">
-                <img src="resources/img/store.jpg" alt="Product 2">
-                <h3>Select The Store</h3>
-                <p>Select the store that you prefer from out catalog</p>
-            </div>
-            <div class="product">
-                <img src="resources/img/reserve.jpg" alt="Product 3">
-                <h3>Reserve!</h3>
-                <p>Reserve the bike, and relax!</p>
-            </div>
-        </section>
-    </main>
-    <footer>
-        <p>&copy; Bike's 2023</p>
-    </footer>
+    <search-box></search-box>
+    <bike-catalog></bike-catalog>
 </body>
 
 </html>
