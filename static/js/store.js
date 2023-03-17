@@ -6,7 +6,7 @@ export class Store {
       this.listeners = [];
     }
   
-    emitChange = (newValue) => this.listeners.forEach(listener => listener.render(newValue));
+    emitChange = (newValue) => this.listeners.forEach(listener => listener.render && typeof listener.render === "function" && listener.render(newValue));
   
     addChangeListener = (...listeners) => this.listeners.push(...listeners);
   

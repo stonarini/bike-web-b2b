@@ -2,3 +2,4 @@
 
 sudo rm -rf /srv/http/bike-web-b2b/*
 sudo cp -r ./* /srv/http/bike-web-b2b/
+sudo chmod 755 -R /srv/http/bike-web-b2b/

@@ -1,4 +1,4 @@
-import { Store, dispatcher } from './store.js';
+import { Store, dispatcher } from './static/js/store.js';
 
 const bikeStore = new Store("bikes");
 
@@ -34,6 +34,6 @@ searchInput.addEventListener('search', (e) => {
         new CustomEvent("searchbikes"));
 });
 
-bikeStore.addChangeListener(document.querySelector('bike-catalog'))
+bikeStore.addChangeListener(...document.querySelectorAll('bike-catalog'))
 
 dispatcher.dispatchEvent(new CustomEvent('searchbikes'));
