@@ -1,148 +1,115 @@
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
 body {
-  font-family: Arial, sans-serif;
-  color: #e4e1c2;
+	font-family: Arial, sans-serif;
+	margin: 0;
+	padding: 0;
 }
 
 header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 10px;
-  background-color: #3b3f42;
+	background-color: #131921;
+	display: flex;
+	align-items: center;
+	padding: 10px 50px;
+    justify-content: center;
 }
 
-h1 {
-  font-size: 2rem;
-  text-transform: uppercase;
+.logo img {
+	height: 50px;
 }
 
-nav ul {
-  list-style: none;
-  display: flex;
+.search-bar {
+	margin-left: 50px;
+	flex-grow: 1;
+    display: flex;
 }
 
-nav li {
-  margin-left: 10px;
+.search-bar input[type="text"] {
+	padding: 5px;
+	border-radius: 5px;
+	border: none;
+	max-width: 500px;
+    flex-grow: 1;
 }
 
-nav a {
-  color: #e4e1c2;
-  text-decoration: none;
-}
-
-nav a:hover {
-  text-decoration: underline;
+.search-bar button {
+	padding: 5px 15px;
+	border-radius: 5px;
+	border: none;
+	background-color: #febd69;
+	color: #232f3e;
+	font-weight: bold;
+	margin-left: 10px;
+	cursor: pointer;
 }
 
 main {
-  padding: 20px;
+	padding: 50px;
+    background: #e3e6e6;
 }
 
-#hero {
-  background-image: url("../img/banner.jpg");
-  background-size: cover;
-  background-position: center;
-  text-align: center;
-  padding: 100px 0;
-  margin-bottom: 20px;
+section {
+	margin: 50px 0;
 }
 
-#hero h2 {
-  font-size: 3rem;
-  text-shadow: 1px 1px #3b3f42;
-}
-
-#featured {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-}
-
-.product {
-  width: 30%;
-  padding: 20px;
-  margin-bottom: 20px;
-  background-color: #3b3f42;
-  border: 1px solid #e4e1c2;
-  border-radius: 5px;
-}
-
-.product img {
-  display: block;
-  margin: 0 auto 10px;
-  max-width: 100%;
-  max-height: 250px;
-}
-
-.product h3 {
-  font-size: 1.5rem;
-  text-transform: uppercase;
-  margin-bottom: 10px;
-}
-
-.product p {
-  font-size: 1.2rem;
+section > h2, section > p {
+    margin: 0;
 }
 
 footer {
-  text-align: center;
-  padding: 10px;
-  background-color: #3b3f42;
-  margin-top: 20px;
+	background-color: #232f3e;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 20px 50px;
 }
 
-footer p {
-  font-size: 1.2rem;
-  text-transform: uppercase;
+.social-links ul {
+	display: flex;
+	list-style: none;
+	padding: 0;
+	margin: 0;
 }
 
-.search-form {
-  text-align: center;
-  padding: 20px 0px;
-  margin: 25px auto;
-  background-color: #e4e1c2;
-  border-radius: 15px;
-  border: 5px solid #3b3f42;
-  width: 80%;
+.social-links li {
+	margin: 0 10px;
 }
 
-.search-form input[type="text"] {
-  width: 250px;
-  padding: 8px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  font-size: 16px;
-  margin-right: 10px;
+.social-links li a img {
+	height: 30px;
 }
 
-.search-form button[type="submit"] {
-  background-color: #3b3f42;
-  color: #e4e1c2;
-  border: none;
-  border-radius: 4px;
-  padding: 8px 12px;
-  font-size: 16px;
-  cursor: pointer;
+.banner {
+    border-radius: 15px;
 }
 
-@media screen and (max-width: 768px) {
-  #featured .product {
-    width: 45%;
-  }
+.banner h3 {
+    margin: 0;
+    padding: 20px;
+    text-transform: capitalize;
 }
 
-@media screen and (max-width: 576px) {
-  #hero h2 {
-    font-size: 2rem;
-  }
-  #featured .product {
-    width: 100%;
-    margin-bottom: 20px;
-  }
+@media only screen and (max-width: 768px) {
+	header {
+		padding: 10px;
+		flex-wrap: wrap;
+	}
+
+	.logo {
+		margin-bottom: 10px;
+	}
+
+	.search-bar {
+		margin-left: 0;
+		margin-top: 10px;
+	}
+
+    main {
+	    padding: 20px;
+    }
+	.product-card {
+		margin: 20px 0;
+	}
+
+    bike-catalog {
+        grid-template-columns: 1fr;
+    }
 }
