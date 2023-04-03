@@ -1,7 +1,12 @@
+import { dispatcher } from "./store.js";
+
 class BikeCard extends HTMLElement {
+    #cardState;
+
     constructor() {
         super();
         this.attachShadow({ mode: 'open' });
+        this.addEventListener('click', (e) => e.stopPropagation() || this.#cardState.next(e.data));
     }
 
     set bike(bike) {
@@ -9,70 +14,51 @@ class BikeCard extends HTMLElement {
     }
 
     render(bike) {
+        this.#cardState = this.#initCardState(bike)
         this.shadowRoot.innerHTML = `
         <style>
-        :host {
-          background-color: white;
-          border-radius: 10px;
-          box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-          padding: 20px;
-          text-align: center;
-          transition: transform 0.2s ease-in-out;
-        }
-      
-        :host(:hover) {
-          transform: translateY(-10px);
-        }
-      
-        h2 {
-          font-size: 24px;
-          margin-bottom: 10px;
-        }
-      
-        p {
-          font-size: 16px;
-          margin-bottom: 5px;
-        }
-      
-        img {
-          display: block;
-          margin: 0 auto;
-          max-width: 100%;
-        }
-      
-        button {
-          background-color: #4caf50;
-          border: none;
-          border-radius: 5px;
-          color: white;
-          cursor: pointer;
-          font-size: 16px;
-          margin-top: 10px;
-          padding: 10px 20px;
-          transition: background-color 0.2s ease-in-out;
-        }
-      
-        button:hover {
-          background-color: #388e3c;
-        }
-        </style>
-        <div class="bike-card">
-          <h2>${bike.name} (${bike.brand})</h2>
-          <p>Category: ${bike.category}</p>
-          <p>Weight: ${bike.weight}</p>
-          <p>Frame Material: ${bike.frame}</p>
-          <p>Fork Brand: ${bike.fork}</p>
-          <p>Wheels Material: ${bike.wheels}</p>
-          <p>Price: ${bike.price}</p>
-          <p>Available Wheel Sizes: ${bike.wheelsize.join(', ')}</p>
-          <p>Brakes: ${bike.brakes}</p>
-          <p>Available Groupsets: ${bike.groupset.join(', ')}</p>
-          <p>Drivetrain: ${bike.drivetrain}</p>
-          <p>Suspension Type: ${bike.suspension}</p>
-          <p>Suspension Travel (Front/Rear): ${bike.travel.front}/${bike.travel.rear}</p>
-          <p>Year of Creation: ${bike.year}</p>
-        </div>
-      `;
+            :host {
+                margin: 0 20px;
+                border: 1px solid #ccc;
+                border-radius: 10px;
+                padding: 20px;
+                text-align: center;
+                background-color: white;
+                transition: box-shadow 0.2s ease-out;
+            }
+            :host(:hover) {
+                cursor: pointer;
+                box-shadow: 5px 5px 10px gray;
+            }
+        </style>`;
+        this.#cardState.next()
+    }
+
+    *#initCardState(bike) {
+        let bikeInfo = document.createElement("bike-info");
+        bikeInfo.bike = bike;
+        this.shadowRoot.appendChild(bikeInfo);
+
+        yield;
+        document.dispatchEvent(new Event('click'))
+        document.addEventListener('click', () => this.bike = bike, { once: true });
+        let storesList = document.createElement("stores-list");
+        storesList.stores = bike.stores;
+        this.shadowRoot.replaceChild(storesList, bikeInfo);
+
+        let store = yield;
+        let dateRange = document.createElement("date-range");
+        dateRange.render(new Date(store.availability.from), new Date(store.availability.to))
+        this.shadowRoot.replaceChild(dateRange, storesList)
+
+        let dates = yield
+        dispatcher.dispatchEvent(new CustomEvent("reservebike", { detail: {
+            startDate: dates.startDate,
+            endDate: dates.endDate,
+            bike_id: bike._id,
+            store_id: store._id
+        }}));
+        document.dispatchEvent(new Event('click'))
     }
 }
 
