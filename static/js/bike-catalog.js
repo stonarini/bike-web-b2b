@@ -8,11 +8,17 @@ class BikeCatalog extends HTMLElement {
         this.shadowRoot.innerHTML = `<style>
         :host {
             display: grid;
-            grid-template-columns: repeat(auto-fit, 400px);
+            grid-template-columns: 1fr 1fr 1fr;
             gap: 50px;
             justify-content: center;
             padding: 2em;
-          }
+        }
+
+        @media only screen and (max-width: 1500px) {
+            :host {
+                grid-template-columns: 1fr;
+            }
+        }
         </style>`;
         bikes.forEach(bike => {
             const bikeCard = document.createElement('bike-card');
