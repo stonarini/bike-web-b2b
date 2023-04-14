@@ -56,7 +56,12 @@ class DateRange extends HTMLElement {
         `
         let btn = document.createElement("button");
         btn.textContent = "Reserve";
-        btn.addEventListener("click", (e) => e.data = Array.prototype.reduce.call(this.shadowRoot.querySelectorAll('input'), (a, i) => ({ ...a, [i.name]: new Date(i.value)}), {}));
+        btn.addEventListener("click", e => {
+            e.data = Array.prototype.reduce.call(this.shadowRoot.querySelectorAll('input'), (a, i) => ({ ...a, [i.name]: new Date(i.value)}), {})
+            if (!e.originalTarget) {
+                e.originalTarget = btn;
+            }
+        });
         this.addEventListener("click", e => e.originalTarget != btn ? e.stopPropagation(): true)
         this.shadowRoot.appendChild(btn);
     }
